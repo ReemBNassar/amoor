@@ -23,24 +23,19 @@
             background: #0f172a;
         }
 
-        /* كرت بوزنة وسط ومثالية - مش ضخم ومش صغير كتير */
         .game-box {
             background: rgba(30, 41, 59, 0.95);
             backdrop-filter: blur(10px);
             padding: 18px 16px;
-            /* مسافات داخلية مريحة للنصوص */
             border-radius: 16px;
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55);
             text-align: center;
             max-width: 320px;
-            /* العرض الوسطي الجديد المريح للعين */
             width: 90%;
             border: 2px solid #3b82f6;
             transition: all 0.3s ease;
             box-sizing: border-box;
         }
-
-        /* حجم متناسق لصورة عموري الدائرية */
         .avatar-img {
             width: 80px;
             height: 80px;
@@ -54,14 +49,13 @@
         h2 {
             color: #3b82f6;
             font-size: 1.15rem;
-            /* كبرنا الخط شوي لتسهيل القراءة */
             margin-top: 0;
             margin-bottom: 8px;
         }
 
         p {
             font-size: 0.88rem;
-            /* حجم نص مريح ومناسب جداً */
+
             color: #cbd5e1;
             line-height: 1.4;
             margin: 0 0 8px 0;
@@ -79,7 +73,6 @@
             color: #fff;
             border: 1px solid #475569;
             padding: 8px 12px;
-            /* أزرار واضحة وسهلة الضغط */
             font-size: 0.85rem;
             border-radius: 8px;
             cursor: pointer;
@@ -110,7 +103,6 @@
 
         .big-title {
             font-size: 1.4rem;
-            /* خط تهنئة فخم وواضح */
             font-weight: 900;
             background: linear-gradient(45deg, #ff007f, #3b82f6);
             -webkit-background-clip: text;
@@ -131,7 +123,6 @@
 
 <body>
 
-    <!-- الواجهة الأولى: الترحيب وقفل الحماية -->
     <div class="game-box" id="welcomeBox">
         <h2>🔐 منطقة محظورة!</h2>
         <p>هذه الصفحة تحتوي على مفاجأة سرية لعموري، لكي تدخل يجب أن تثبت هويتك أولاً وتتخطى نظام الحماية.</p>
@@ -141,17 +132,15 @@
         </div>
     </div>
 
-    <!-- واجهة اللعبة والتحدي -->
     <div class="game-box" id="quizBox" style="display: none;">
         <h2>🎯 تحدي الهوية</h2>
         <p id="questionText">السؤال يظهر هنا...</p>
 
         <div class="options-grid" id="optionsContainer">
-            <!-- سيتم توليد الخيارات برمجياً -->
+            
         </div>
     </div>
 
-    <!-- واجهة المفاجأة المخفية النهائية -->
     <div class="game-box final-card hidden-gift" id="giftBox">
         <img src="amer2.jpg" class="avatar-img" alt="عموري البطل" onerror="this.src='amer2.JPG'">
         <div style="font-size: 22px; margin-bottom: 2px;">👑</div>
