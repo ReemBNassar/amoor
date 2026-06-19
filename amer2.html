@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحدي عيد ميلاد عموري!</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
+
+        body {
+            margin: 0;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Cairo', sans-serif;
+            color: #fff;
+            overflow: hidden;
+            box-sizing: border-box;
+            background: #0f172a;
+        }
+
+        /* كرت بوزنة وسط ومثالية - مش ضخم ومش صغير كتير */
+        .game-box {
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 18px 16px;
+            /* مسافات داخلية مريحة للنصوص */
+            border-radius: 16px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55);
+            text-align: center;
+            max-width: 320px;
+            /* العرض الوسطي الجديد المريح للعين */
+            width: 90%;
+            border: 2px solid #3b82f6;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        /* حجم متناسق لصورة عموري الدائرية */
+        .avatar-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2.5px solid #3b82f6;
+            margin-bottom: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            color: #3b82f6;
+            font-size: 1.15rem;
+            /* كبرنا الخط شوي لتسهيل القراءة */
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+
+        p {
+            font-size: 0.88rem;
+            /* حجم نص مريح ومناسب جداً */
+            color: #cbd5e1;
+            line-height: 1.4;
+            margin: 0 0 8px 0;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .option-btn {
+            background: #334155;
+            color: #fff;
+            border: 1px solid #475569;
+            padding: 8px 12px;
+            /* أزرار واضحة وسهلة الضغط */
+            font-size: 0.85rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-weight: bold;
+            transition: 0.2s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .option-btn:hover {
+            background: #3b82f6;
+            border-color: #3b82f6;
+            transform: scale(1.02);
+        }
+
+        .hidden-gift {
+            display: none;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .show-gift {
+            display: block !important;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .big-title {
+            font-size: 1.4rem;
+            /* خط تهنئة فخم وواضح */
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff007f, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 6px 0;
+        }
+
+        .final-card {
+            background: linear-gradient(135deg, rgba(30, 27, 75, 0.94) 0%, rgba(49, 16, 66, 0.94) 100%);
+            border: 2px solid #ff007f;
+        }
+
+        .final-card .avatar-img {
+            border-color: #ff007f;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- الواجهة الأولى: الترحيب وقفل الحماية -->
+    <div class="game-box" id="welcomeBox">
+        <h2>🔐 منطقة محظورة!</h2>
+        <p>هذه الصفحة تحتوي على مفاجأة سرية لعموري، لكي تدخل يجب أن تثبت هويتك أولاً وتتخطى نظام الحماية.</p>
+        <div class="options-grid">
+            <button class="option-btn" style="background: #3b82f6; border-color: #2563eb;" onclick="startQuiz()">ابدأ
+                التحدي 🔓</button>
+        </div>
+    </div>
+
+    <!-- واجهة اللعبة والتحدي -->
+    <div class="game-box" id="quizBox" style="display: none;">
+        <h2>🎯 تحدي الهوية</h2>
+        <p id="questionText">السؤال يظهر هنا...</p>
+
+        <div class="options-grid" id="optionsContainer">
+            <!-- سيتم توليد الخيارات برمجياً -->
+        </div>
+    </div>
+
+    <!-- واجهة المفاجأة المخفية النهائية -->
+    <div class="game-box final-card hidden-gift" id="giftBox">
+        <img src="amer2.jpg" class="avatar-img" alt="عموري البطل" onerror="this.src='amer2.JPG'">
+        <div style="font-size: 22px; margin-bottom: 2px;">👑</div>
+        <h1 class="big-title">بطل عموري</h1>
+        <p style="font-size: 0.9rem; color: #fff; font-weight: bold;">انت هكر كيف قدرت تهكر النظام 😎</p>
+        <p style="font-size: 0.82rem; margin-top: 6px; color: #f1f5f9;">
+            كل عام وأنت بألف خير عقبال الـ 1000 سنة نجاح وسعادة وتحقيق لكل أحلامك يا أحلى عمور بالدنيا خالتو ريم احلى
+            خالة بالمجرة ✨💙
+        </p>
+        <button class="option-btn" style="background: #ff007f; margin-top: 10px; padding: 8px 15px; width: 100%;"
+            onclick="boom()">كيفوو مع عمووووور💥</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                q: "السؤال الأول: مين احلى و اشطر و ابطل ولد بالعاالم؟ 😎",
+                options: ["عموري طبعاً", "برضه عموري", "مين غيره؟ عموري"],
+                correct: 0
+            },
+            {
+                q: "السؤال الثاني: شو بتتوقع خالتو ريم احسن خالة بالمجرة تعطيك هدية؟ 🎁",
+                options: ["سيارة فراري", "ايفون 17 برو ماكس", "طشة بس تخلص امتحانات"],
+                correct: 1
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        function startQuiz() {
+            document.getElementById("welcomeBox").style.display = "none";
+            document.getElementById("quizBox").style.display = "block";
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            if (currentQuestion < questions.length) {
+                const current = questions[currentQuestion];
+                document.getElementById("questionText").innerText = current.q;
+
+                const container = document.getElementById("optionsContainer");
+                container.innerHTML = "";
+
+                current.options.forEach((opt, index) => {
+                    const btn = document.createElement("button");
+                    btn.className = "option-btn";
+                    btn.innerText = opt;
+                    btn.onclick = () => nextStep();
+                    container.appendChild(btn);
+                });
+            } else {
+                document.getElementById("quizBox").style.display = "none";
+                const giftBox = document.getElementById("giftBox");
+                giftBox.classList.add("show-gift");
+                boom();
+            }
+        }
+
+        function nextStep() {
+            currentQuestion++;
+            loadQuestion();
+        }
+
+        function boom() {
+            var duration = 5 * 1000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({ particleCount: 7, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ff007f', '#3b82f6', '#ffffff'] });
+                confetti({ particleCount: 7, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ff007f', '#3b82f6', '#ffffff'] });
+                if (Date.now() < end) { requestAnimationFrame(frame); }
+            }());
+        }
+    </script>
+</body>
+
+</html>
