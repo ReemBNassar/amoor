@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كل عام وأنتِ بخير رغود! 🎉</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #ffe5ec, #ffb3c6);
+            color: #4a1525;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            overflow-x: hidden;
+            /* لمنع ظهور شريط التمرير الأفقي بسبب المفرقعات */
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+            /* تأكد من أن المحتوى فوق المفرقعات */
+        }
+
+        h1 {
+            color: #ff477e;
+        }
+
+        .challenge-box {
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px dashed #ff7096;
+            border-radius: 15px;
+            background: #fff0f3;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            border: 2px solid #ffb3c6;
+            border-radius: 25px;
+            font-size: 16px;
+            text-align: center;
+            outline: none;
+        }
+
+        input[type="text"]:focus {
+            border-color: #ff477e;
+        }
+
+        button {
+            background-color: #ff477e;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            font-size: 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #ff0a54;
+            transform: scale(1.05);
+        }
+
+        .media-content {
+            display: none;
+            margin-top: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .media-content img,
+        .media-content video {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .success-message {
+            color: #2a9d8f;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* منطقة المفرقعات اللانهائية */
+        #confetti-spammer {
+            margin-top: 30px;
+            padding: 20px;
+            border-top: 2px solid #ffb3c6;
+        }
+
+        #spam-button {
+            background-color: #ff0a54;
+            /* لون أغمق وأكثر حيوية */
+            font-size: 18px;
+            padding: 15px 30px;
+            box-shadow: 0 5px 15px rgba(255, 10, 84, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    <!-- تضمين مكتبة المفرقعات -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>✨ ميلاد سعيد يا أحلى رغود! ✨</h1>
+        <p>عشان تشوفي زكرياتنا، لازم تتخطي التحديات السريعة هادي وتثبتي إنك رغود الحقيقية! 😉</p>
+
+        <hr style="border: 0; height: 1px; background: #ffb3c6; margin: 20px 0;">
+
+        <div id="challenge1" class="challenge-box">
+            <h3>🔒 التحدي الأول: سؤال الأذكياء</h3>
+            <p>شو هي الأكلة المفضلة اللي دايماً بنحب نطلبها مع بعض؟ </p>
+            <input type="text" id="answer1" placeholder="اكتبي الإجابة هنا...">
+            <br>
+            <button onclick="checkChallenge(1, 'صفيحة')">تحقق من الإجابة 🚀</button>
+
+            <div id="result1" class="media-content">
+                <p class="success-message">🎉 صح! برافو عليكِ.. هادي أول مفاجأة:</p>
+                <img src="5938272679272058927.jpg">
+                <br>
+                <button onclick="nextChallenge(2)">الانتقال للتحدي الثاني ➡️</button>
+            </div>
+        </div>
+
+        <div id="challenge2" class="challenge-box hidden">
+            <h3>🔒 التحدي الثاني: كلمة السر</h3>
+            <p>"شو كنا نسمي المكان الي عند الواحة ههه؟"</p>
+            <input type="text" id="answer2" placeholder="اكتبي الإجابة هنا...">
+            <br>
+            <button onclick="checkChallenge(2, 'المنتزه')">تحقق من الإجابة 🚀</button>
+
+            <div id="result2" class="media-content">
+                <p class="success-message">🥳 كفوو! تذكرتي! شوفي اشكالنا:</p>
+
+                <img src="Screenshot_20260707_232700_Gallery.png">
+
+                </video>
+                <br>
+                <button onclick="nextChallenge(3)">التحدي الأخير والأهم 💖</button>
+            </div>
+        </div>
+
+        <div id="challenge3" class="challenge-box hidden">
+            <h3>🔒 التحدي الثالث: لغز الضحك</h3>
+            <p> شو اكتر فلتر بنحبووو هههه؟</p>
+            <input type="text" id="answer3" placeholder="اكتبي الجواب...">
+            <br>
+            <button onclick="checkChallenge(3, 'ابو تم كبير')">افتحي الهدية الكبرى 🎁</button>
+
+            <div id="result3" class="media-content">
+                <h2 style="color: #ff0a54;">👑 كل عام وأنتِ بخير يا رغود! 👑</h2>
+                <p>يا بست فريندييي. بتمنالك سنة بتجنن زيك يا رب مليانة انجازات حلوة و اشوفك اجدع مهندسة!
+                    🎈🎈</p>
+                <img src="IMG-20230618-WA0125.jpg">
+
+                <!-- منطقة المفرقعات اللانهائية - ستظهر في النهاية فقط -->
+                <div id="confetti-spammer" class="hidden">
+                    <p>احتفلي قد ما بدك! اضغطي ع الزر هاد 😉👇</p>
+                    <button id="spam-button" onclick="celebrateLoudly()">🎉 مفرقعاتتتت 🎉</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // دالة لإطلاق مفرقعات بسيطة عند الإجابة الصحيحة
+        function fireConfetti() {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 } // تظهر من منتصف الشاشة تقريباً
+            });
+        }
+
+        // دالة لإطلاق مفرقعات قوية ومتكررة عند الضغط على الزر الأخير
+        function celebrateLoudly() {
+            // إطلاق من اليمين
+            confetti({
+                particleCount: 150,
+                angle: 60,
+                spread: 80,
+                origin: { x: 0 }
+            });
+            // إطلاق من اليسار
+            confetti({
+                particleCount: 150,
+                angle: 120,
+                spread: 80,
+                origin: { x: 1 }
+            });
+        }
+
+        function checkChallenge(challengeNum, correctAnswer) {
+            // تصحيح بسيط هنا لضمان عمل الدالة بشكل صحيح لكل التحديات
+            var userAnswer = document.getElementById('answer' + challengeNum).value.trim();
+            var resultDiv = document.getElementById('result' + challengeNum);
+
+            if (userAnswer === correctAnswer) {
+                // إظهار المحتوى
+                resultDiv.style.display = 'block';
+
+                // إطلاق المفرقعات! 🎉
+                fireConfetti();
+
+                // إذا كان هذا هو التحدي الأخير، أظهر زر المفرقعات اللانهائية
+                if (challengeNum === 3) {
+                    document.getElementById('confetti-spammer').classList.remove('hidden');
+                }
+            } else {
+                alert('خطأأأ! فكري منيح يا رغود، مش إنتِ الحقيقية شكلك 😜');
+            }
+        }
+
+        function nextChallenge(nextNum) {
+            // إخفاء التحدي الحالي (السابق)
+            var currentNum = nextNum - 1;
+            document.getElementById('challenge' + currentNum).classList.add('hidden');
+
+            // إظهار التحدي القادم
+            document.getElementById('challenge' + nextNum).classList.remove('hidden');
+        }
+    </script>
+</body>
+
+</html>
